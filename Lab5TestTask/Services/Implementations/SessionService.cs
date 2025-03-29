@@ -29,6 +29,8 @@ public class SessionService : ISessionService
 
     public async Task<List<Session>> GetSessionsAsync()
     {
-        throw new NotImplementedException();
+        return await _dbContext.Sessions
+            .Where(session => session.EndedAtUTC.Year < 2025 && session.User.Status == UserStatus.Active)
+            .ToListAsync();
     }
 }
