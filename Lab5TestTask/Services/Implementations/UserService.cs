@@ -19,7 +19,7 @@ public class UserService : IUserService
     }
     public async Task<User> GetUserAsync()
     {
-        throw new NotImplementedException();
+        return await _dbContext.Users.OrderByDescending(user => user.Sessions.Count).FirstOrDefaultAsync();
     }
 
     public async Task<List<User>> GetUsersAsync()
